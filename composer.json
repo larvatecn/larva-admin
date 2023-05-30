@@ -1,0 +1,47 @@
+{
+    "name": "larva/larva-admin",
+    "description": "采用 laravel、amis 打造的后台框架，拥有 120+ 种组件，只用后端代码就能实现复杂的页面效果，让开发者能够快速构建高效的后台管理系统。",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Larva Team",
+            "email": "support@larva.com.cn",
+            "homepage": "https://github.com/larvatecn/larva-admin"
+        }
+    ],
+    "homepage": "https://github.com/larvatecn/larva-admin",
+    "keywords": [
+        "Laravel",
+        "Admin"
+    ],
+    "require": {
+        "php": ">=8.0",
+        "illuminate/support": "~9|~10"
+    },
+    "require-dev": {
+        "laravel/framework": "~9|~10",
+        "friendsofphp/php-cs-fixer": "^3.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Larva\\Admin\\": "src/"
+        },
+        "files": [
+            "src/Libs/helpers.php"
+        ]
+    },
+    "scripts": {
+        "check-style": "vendor/bin/php-cs-fixer fix --using-cache=no --diff --config=.php-cs-fixer.php --dry-run --ansi",
+        "fix-style": "vendor/bin/php-cs-fixer fix --using-cache=no --config=.php-cs-fixer.php --ansi"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Larva\\Admin\\AdminServiceProvider"
+            ],
+            "aliases": {
+                "Admin": "Larva\\Admin\\Facades\\Admin"
+            }
+        }
+    }
+}

@@ -1,0 +1,10 @@
+<?php
+
+namespace {{Namespace}};
+
+use Larva\Admin\Controllers\AuthController as AdminAuthController;
+
+class AuthController extends AdminAuthController
+{
+
+}

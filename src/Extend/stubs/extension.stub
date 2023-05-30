@@ -1,0 +1,18 @@
+<?php
+
+namespace {namespace};
+
+use Larva\Admin\Renderers\TextControl;
+use Larva\Admin\Extend\ServiceProvider;
+
+class {className}ServiceProvider extends ServiceProvider
+{
+	{property}
+
+	public function settingForm()
+	{
+	    return $this->baseSettingForm()->body([
+            TextControl::make()->name('value')->label('Value')->required(true),
+	    ]);
+	}
+}

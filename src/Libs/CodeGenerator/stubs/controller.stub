@@ -1,0 +1,48 @@
+<?php
+
+namespace {{ Namespace }};
+
+use Larva\Admin\Renderers\Page;
+use Larva\Admin\Renderers\Form;
+use Larva\Admin\Renderers\TableColumn;
+use Larva\Admin\Renderers\TextControl;
+use Larva\Admin\Controllers\AdminController;
+use {{ UseService }};
+
+/**
+ * @property {{ ServiceName }} $service
+ */
+class {{ ClassName }} extends AdminController
+{
+    protected string $serviceName = {{ ServiceName }}::class;
+
+    public function list(): Page
+    {
+        $crud = $this->baseCRUD()
+            ->filterTogglable(false)
+            ->headerToolbar([
+                $this->createButton(true),
+                ...$this->baseHeaderToolBar(),
+            ])
+            ->columns([
+                {{ ListContent }}
+                $this->rowActions(true),
+            ]);
+
+        return $this->baseList($crud);
+    }
+
+    public function form(): Form
+    {
+        return $this->baseForm()->body([
+            {{ FormContent }}
+        ]);
+    }
+
+    public function detail(): Form
+    {
+        return $this->baseDetail()->body([
+            {{ DetailContent }}
+        ]);
+    }
+}
