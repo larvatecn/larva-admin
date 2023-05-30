@@ -7,6 +7,7 @@ use Larva\Admin\Models\AdminMenu;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
+ * 后台菜单
  * @method AdminMenu getModel()
  * @method AdminMenu|Builder query()
  */
@@ -66,7 +67,7 @@ class AdminMenuService extends AdminService
         $this->query()->where('id', '<>', $excludeId)->update(['is_home' => 0]);
     }
 
-    public function list()
+    public function grid()
     {
         return ['items' => $this->getTree()];
     }

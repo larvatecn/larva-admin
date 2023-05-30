@@ -96,7 +96,7 @@ class AdminPermissionService extends AdminService
         return false;
     }
 
-    public function list()
+    public function grid()
     {
         return ['items' => $this->getTree()];
     }

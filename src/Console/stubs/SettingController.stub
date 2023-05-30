@@ -22,7 +22,7 @@ class SettingController extends AdminController
         return $this->response()->success($page);
     }
 
-    public function form()
+    public function form(): \Larva\Admin\Renderers\Form
     {
         return $this->baseForm()
             ->redirect('')
@@ -31,12 +31,18 @@ class SettingController extends AdminController
             ->body(
                 Tabs::make()->tabs([
                     Tab::make()->title('基本设置')->body([
-                        TextControl::make()->label('网站名称')->name('site_name'),
-                        InputKV::make()->label('附加配置')->name('addition_config'),
+                        TextControl::make()->label('网站标题')->name('website_title')->maxLength(120),
+                        TextControl::make()->label('网站关键词')->name('website_keywords'),
+                        TextControl::make()->label('网站描述')->name('website_description'),
+                        TextControl::make()->label('ICP备案')->name('website_icp_record'),
+                        TextControl::make()->label('公安备案')->name('website_police_record'),
+                        TextControl::make()->label('服务邮箱')->name('website_support_email'),
+                        TextControl::make()->label('法律邮箱')->name('website_lawyer_email'),
                     ]),
-                    Tab::make()->title('上传设置')->body([
-                        TextControl::make()->label('上传域名')->name('upload_domain'),
-                        TextControl::make()->label('上传路径')->name('upload_path'),
+                    Tab::make()->title('用户设置')->body([
+                        SwitchControl::make()->label('新用户注册')->name('user_register'),
+                        SwitchControl::make()->label('社交用户自动注册')->name('user_socialite_registration'),
+                        SwitchControl::make()->label('短信注册')->name('user_enable_sms_registration'),
                     ]),
                 ])
             );
@@ -44,13 +50,6 @@ class SettingController extends AdminController
 
     public function store(Request $request)
     {
-        $data = $request->only([
-            'site_name',
-            'addition_config',
-            'upload_domain',
-            'upload_path',
-        ]);
-
-        return settings()->adminSetMany($data);
+        return settings()->adminSetMany($request->all());
     }
 }

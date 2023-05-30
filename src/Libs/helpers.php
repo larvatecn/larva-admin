@@ -162,9 +162,19 @@ if (!function_exists('is_json')) {
 }
 
 if (!function_exists('settings')) {
-    function settings()
+    /**
+     * Get setting value or object.
+     *
+     * @param  mixed|null  $default
+     * @return \Larva\Admin\Services\AdminSettingService|mixed
+     */
+    function settings(string $key = '', mixed $default = null, bool $fresh = false)
     {
-        return \Larva\Admin\Services\AdminSettingService::make();
+        if (empty($key)) {
+            return \Larva\Admin\Services\AdminSettingService::make();
+        }
+
+        return \Larva\Admin\Services\AdminSettingService::make()->get($key, $default, $fresh);
     }
 }
 
