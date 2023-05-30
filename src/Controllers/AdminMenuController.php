@@ -14,7 +14,7 @@ class AdminMenuController extends AdminController
 {
     protected string $serviceName = AdminMenuService::class;
 
-    public function list(): Page
+    public function grid(): Page
     {
         $crud = $this->baseCRUD()
             ->loadDataOnce()

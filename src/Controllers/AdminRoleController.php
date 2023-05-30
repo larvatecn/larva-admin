@@ -14,7 +14,7 @@ class AdminRoleController extends AdminController
 {
     protected string $serviceName = AdminRoleService::class;
 
-    public function list(): Page
+    public function grid(): Page
     {
         $crud = $this->baseCRUD()
             ->headerToolbar([

@@ -115,14 +115,14 @@ abstract class AdminController extends Controller
     public function index()
     {
         if ($this->actionOfGetData()) {
-            return $this->response()->success($this->service->list());
+            return $this->response()->success($this->service->grid());
         }
 
         if ($this->actionOfExport()) {
             return $this->export();
         }
 
-        return $this->response()->success($this->list());
+        return $this->response()->success($this->grid());
     }
 
     /**

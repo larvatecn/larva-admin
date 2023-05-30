@@ -4,7 +4,6 @@ namespace Larva\Admin\Controllers;
 
 use Illuminate\Http\Request;
 use Larva\Admin\Admin;
-use Larva\Admin\Admin;
 use Illuminate\Http\JsonResponse;
 use Larva\Admin\Models\Extension;
 use Illuminate\Http\Resources\Json\JsonResource;

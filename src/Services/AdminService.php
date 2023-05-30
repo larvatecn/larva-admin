@@ -77,7 +77,7 @@ abstract class AdminService
      *
      * @return Builder
      */
-    public function listQuery()
+    public function gridQuery()
     {
         return $this->query()->orderByDesc($this->sortColumn());
     }
@@ -97,9 +97,9 @@ abstract class AdminService
      *
      * @return array
      */
-    public function list()
+    public function grid()
     {
-        $query = $this->listQuery();
+        $query = $this->gridQuery();
 
         $items = (clone $query)->paginate(request()->input('perPage', 20))->items();
         $total = (clone $query)->count();

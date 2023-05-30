@@ -106,7 +106,7 @@ class AdminUserService extends AdminService
         return true;
     }
 
-    public function list()
+    public function grid()
     {
         $keyword = request()->keyword;
 

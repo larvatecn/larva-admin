@@ -19,7 +19,7 @@ class AdminPermissionController extends AdminController
 {
     protected string $serviceName = AdminPermissionService::class;
 
-    public function list(): Page
+    public function grid(): Page
     {
         $autoBtn = '';
         if (config('admin.show_auto_generate_permission_button')) {
