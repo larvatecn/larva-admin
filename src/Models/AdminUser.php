@@ -27,6 +27,7 @@ use Illuminate\Foundation\Auth\User;
  * @property string $remember_token 记住我 Token
  * @property $created_at 创建时间
  * @property $updated_at 更新时间
+ * @property \App\Models\User $user 前台用户
  * @property AdminRole[] $roles 角色
  */
 class AdminUser extends User implements AuthenticatableContract
@@ -63,8 +64,8 @@ class AdminUser extends User implements AuthenticatableContract
         $storage = \Illuminate\Support\Facades\Storage::disk(config('admin.upload.disk'));
 
         return Attribute::make(
-            get: fn ($value) => $value ? admin_resource_full_path($value) : url(config('admin.default_avatar')),
-            set: fn ($value) => str_replace($storage->url(''), '', $value)
+            get: fn($value) => $value ? admin_resource_full_path($value) : url(config('admin.default_avatar')),
+            set: fn($value) => str_replace($storage->url(''), '', $value)
         );
     }
 
@@ -76,6 +77,11 @@ class AdminUser extends User implements AuthenticatableContract
     protected static function boot(): void
     {
         parent::boot();
+        static::created(function (AdminUser $model) {
+            if (class_exists(\App\Services\UserService::class)) {
+                \App\Services\UserService::createUser($model->username);
+            }
+        });
         static::deleting(function (AdminUser $model) {
             $model->roles()->detach();
         });
