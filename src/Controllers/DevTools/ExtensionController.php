@@ -215,12 +215,12 @@ class ExtensionController extends AdminController
                         TextControl::make()
                             ->name('name')
                             ->label(__('admin.extensions.form.name'))
-                            ->placeholder('eg: slowlyo/owl-admin')
+                            ->placeholder('eg: larva/larva-admin')
                             ->required(),
                         TextControl::make()
                             ->name('namespace')
                             ->label(__('admin.extensions.form.namespace'))
-                            ->placeholder('eg: Slowlyo\Notice')
+                            ->placeholder('eg: Larva\Notice')
                             ->required(),
                     ])
                 )
@@ -247,7 +247,7 @@ class ExtensionController extends AdminController
      *
      * @return DialogAction
      */
-    public function localInstall()
+    public function localInstall(): DialogAction
     {
         return DialogAction::make()
             ->label(__('admin.extensions.local_install'))
@@ -269,17 +269,7 @@ class ExtensionController extends AdminController
     public function more()
     {
         $q = request('q');
-        // 加速
-        $url = 'http://admin-packagist.dev.slowlyo.top?q=' . $q;
-
-        $result = file_get_contents($url);
-
-        // 如果哪天加速服务挂了，就用官方的
-        if (!$result) {
-            $url = 'https://packagist.org/search.json?tags=owl-admin&per_page=15&q=' . $q;
-            $result = file_get_contents($url);
-        }
-
+        $result = file_get_contents('https://packagist.org/search.json?tags=larva&per_page=15&q=' . $q);
         return $this->response()->success(json_decode($result, true));
     }
 
@@ -288,7 +278,7 @@ class ExtensionController extends AdminController
      *
      * @return DrawerAction
      */
-    public function moreExtend()
+    public function moreExtend(): DrawerAction
     {
         return DrawerAction::make()
             ->label(__('admin.extensions.more_extensions'))
@@ -391,7 +381,7 @@ class ExtensionController extends AdminController
     /**
      * @throws \Exception
      */
-    protected function getFilePath($file)
+    protected function getFilePath($file): string
     {
         $disk = config('admin.upload.disk') ?: 'local';
 
