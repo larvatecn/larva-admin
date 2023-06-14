@@ -18,6 +18,9 @@ use Larva\Admin\Libs\CodeGenerator\ServiceGenerator;
 use Larva\Admin\Libs\CodeGenerator\MigrationGenerator;
 use Larva\Admin\Libs\CodeGenerator\ControllerGenerator;
 
+/**
+ * 代码生成器
+ */
 class CodeGeneratorController extends AdminController
 {
     public function index(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
@@ -30,7 +33,7 @@ class CodeGeneratorController extends AdminController
     }
 
 
-    public function form()
+    public function form(): \Larva\Admin\Renderers\Form
     {
         $databaseColumns = Generator::make()->getDatabaseColumns();
         // 下划线的表名处理成驼峰文件名
@@ -139,7 +142,7 @@ class CodeGeneratorController extends AdminController
             ]);
     }
 
-    public function columnTable()
+    public function columnTable(): \Larva\Admin\Renderers\Card
     {
         return amisMake()->Card()->body([
             amisMake()->Alert()

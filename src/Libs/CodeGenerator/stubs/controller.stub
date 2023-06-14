@@ -16,7 +16,7 @@ class {{ ClassName }} extends AdminController
 {
     protected string $serviceName = {{ ServiceName }}::class;
 
-    public function list(): Page
+    public function grid(): Page
     {
         $crud = $this->baseCRUD()
             ->filterTogglable(false)

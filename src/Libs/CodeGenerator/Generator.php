@@ -47,7 +47,7 @@ class Generator
         return new self();
     }
 
-    public function needCreateOptions()
+    public function needCreateOptions(): array
     {
         return [
             [

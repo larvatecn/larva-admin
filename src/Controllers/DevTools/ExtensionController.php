@@ -49,7 +49,7 @@ class ExtensionController extends AdminController
             return $this->response()->success(['rows' => $data]);
         }
 
-        $page = $this->basePage()->body($this->list());
+        $page = $this->basePage()->body($this->grid());
 
         return $this->response()->success($page);
     }
@@ -78,7 +78,7 @@ class ExtensionController extends AdminController
         ];
     }
 
-    public function list()
+    public function grid()
     {
         return CRUDCards::make()
             ->perPage(20)

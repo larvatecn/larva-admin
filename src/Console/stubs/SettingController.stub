@@ -40,7 +40,7 @@ class SettingController extends AdminController
                         TextControl::make()->label('服务邮箱')->name('website_support_email'),
                         TextControl::make()->label('法律邮箱')->name('website_lawyer_email'),
                     ]),
-                    Tab::make()->title('用户设置')->body([
+                    Tab::make()->title('上传设置')->body([
                         SwitchControl::make()->label('新用户注册')->name('user_register'),
                         SwitchControl::make()->label('社交用户自动注册')->name('user_socialite_registration'),
                         SwitchControl::make()->label('短信注册')->name('user_enable_sms_registration'),

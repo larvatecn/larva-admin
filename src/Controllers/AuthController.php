@@ -285,7 +285,7 @@ JS,
 
     /**
      * 保存用户设置
-     * 
+     *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
      */
     public function saveUserSetting(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource

@@ -16,7 +16,8 @@
     ],
     "require": {
         "php": ">=8.0",
-        "illuminate/support": "~9|~10"
+        "illuminate/support": "~9|~10",
+        "laravel/sanctum": "^3.2"
     },
     "require-dev": {
         "laravel/framework": "~9|~10",
