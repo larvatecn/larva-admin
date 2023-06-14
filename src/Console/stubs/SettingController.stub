@@ -25,6 +25,7 @@ class SettingController extends AdminController
     public function form(): \Larva\Admin\Renderers\Form
     {
         return $this->baseForm()
+            ->panelClassName('px-2 m:px-0')
             ->redirect('')
             ->api($this->getStorePath())
             ->data(settings()->all())
