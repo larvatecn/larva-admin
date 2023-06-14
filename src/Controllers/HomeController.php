@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Controllers;
 
@@ -46,7 +51,8 @@ class HomeController extends AdminController
         return Card::make()
             ->className('h-full clear-card-mb')
             ->body(
-                Custom::make()->html(<<<HTML
+                Custom::make()->html(
+                    <<<HTML
 <div class="h-full flex flex-col mt-5 py-5 px-7">
     <div>『</div>
     <div class="flex flex-1 items-center w-full justify-center" id="hitokoto">
@@ -62,8 +68,8 @@ class HomeController extends AdminController
     <span>」</span>
 </div>
 HTML
-
-                )->onMount(<<<JS
+                )->onMount(
+                    <<<JS
 fetch('https://v1.hitokoto.cn?c=i')
     .then(response => response.json())
     .then(data => {
@@ -87,7 +93,8 @@ JS
             Custom::make()
                 ->name('clock')
                 ->html('<div id="clock" class="text-4xl"></div><div id="clock-date" class="mt-5"></div>')
-                ->onMount(<<<JS
+                ->onMount(
+                    <<<JS
 const clock = document.getElementById('clock');
 const tick = () => {
     clock.innerHTML = (new Date()).toLocaleTimeString();
@@ -98,7 +105,6 @@ tick();
 const clockDate = document.getElementById('clock-date');
 clockDate.innerHTML = (new Date()).toLocaleDateString();
 JS
-
                 ),
         ]);
     }
@@ -198,7 +204,8 @@ series: [
     public function cube(): Card
     {
         return Card::make()->className('h-96 ml-4 w-8/12')->body(
-            Html::make()->html(<<<HTML
+            Html::make()->html(
+                <<<HTML
 <style>
     .cube-box{ height: 300px; display: flex; align-items: center; justify-content: center; }
   .cube { width: 100px; height: 100px; position: relative; transform-style: preserve-3d; animation: rotate 10s linear infinite; }
@@ -245,7 +252,6 @@ series: [
     </div>
 </div>
 HTML
-
             )
         );
     }
@@ -253,20 +259,20 @@ HTML
     private function css(): array
     {
         return [
-            '.clear-card-mb'                 => [
+            '.clear-card-mb' => [
                 'margin-bottom' => '0 !important',
             ],
-            '.cxd-Image'                     => [
+            '.cxd-Image' => [
                 'border' => '0',
             ],
-            '.bg-blingbling'                 => [
-                'color'             => '#fff',
-                'background'        => 'linear-gradient(to bottom right, #2C3E50, #FD746C, #FF8235, #ffff1c, #92FE9D, #00C9FF, #a044ff, #e73827)',
+            '.bg-blingbling' => [
+                'color' => '#fff',
+                'background' => 'linear-gradient(to bottom right, #2C3E50, #FD746C, #FF8235, #ffff1c, #92FE9D, #00C9FF, #a044ff, #e73827)',
                 'background-repeat' => 'no-repeat',
-                'background-size'   => '1000% 1000%',
-                'animation'         => 'gradient 60s ease infinite',
+                'background-size' => '1000% 1000%',
+                'animation' => 'gradient 60s ease infinite',
             ],
-            '@keyframes gradient'            => [
+            '@keyframes gradient' => [
                 '0%{background-position:0% 0%}
                   50%{background-position:100% 100%}
                   100%{background-position:0% 0%}',

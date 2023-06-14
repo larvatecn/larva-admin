@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Traits;
 
@@ -35,10 +40,10 @@ trait Assets
     public static function getAssets()
     {
         return [
-            'js'      => static::asset()->js(),
-            'css'     => static::asset()->css(),
+            'js' => static::asset()->js(),
+            'css' => static::asset()->css(),
             'scripts' => static::asset()->scripts(),
-            'styles'  => static::asset()->styles(),
+            'styles' => static::asset()->styles(),
         ];
     }
 
@@ -55,7 +60,7 @@ trait Assets
     public static function getNav()
     {
         return [
-            'appendNav'  => static::asset()->appendNav(),
+            'appendNav' => static::asset()->appendNav(),
             'prependNav' => static::asset()->prependNav(),
         ];
     }

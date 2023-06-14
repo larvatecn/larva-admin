@@ -1,10 +1,15 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Renderers;
 
 /**
  * 分页容器功能性渲染器。详情请见：https://aisuda.bce.baidu.com/amis/zh-CN/components/pagination-wrapper
- * 
+ *
  * @author slowlyo
  * @version v3.0.0
  * @since 2023-05-13

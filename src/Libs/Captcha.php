@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Libs;
 
@@ -13,10 +18,10 @@ class Captcha
 
     public function __construct($width = 100, $height = 40, $codeNum = 4)
     {
-        $this->width   = $width;
-        $this->height  = $height;
+        $this->width = $width;
+        $this->height = $height;
         $this->codeNum = $codeNum;
-        $this->font    = __DIR__ . '/Facon-2.ttf';
+        $this->font = __DIR__ . '/Facon-2.ttf';
     }
 
     public function showImg()
@@ -39,7 +44,7 @@ class Captcha
     private function createImg()
     {
         $this->im = imagecreatetruecolor($this->width, $this->height);
-        $bgColor  = imagecolorallocate($this->im, 255, 255, 255);
+        $bgColor = imagecolorallocate($this->im, 255, 255, 255);
         imagefill($this->im, 0, 0, $bgColor);
     }
 
@@ -51,21 +56,23 @@ class Captcha
             $noiseColor = imagecolorallocate($this->im, mt_rand(150, 180), mt_rand(150, 180), mt_rand(150, 180));
             for ($j = 0; $j < 5; $j++) {
                 // 添加干扰字符
-                imagettftext($this->im,
+                imagettftext(
+                    $this->im,
                     6,
                     mt_rand(-30, 30),
                     mt_rand(-10, $this->width),
                     mt_rand(-10, $this->height),
                     $noiseColor,
                     $this->font,
-                    $codeSet[mt_rand(0, 29)]);
+                    $codeSet[mt_rand(0, 29)]
+                );
             }
         }
     }
 
     private function createCode()
     {
-        $str = "23456789abcdefghijkmnpqrstuvwxyzABCDEFGHIJKMNPQRSTUVWXYZ";
+        $str = '23456789abcdefghijkmnpqrstuvwxyzABCDEFGHIJKMNPQRSTUVWXYZ';
 
         for ($i = 0; $i < $this->codeNum; $i++) {
             $this->code .= $str[rand(0, strlen($str) - 1)];
@@ -78,8 +85,8 @@ class Captcha
 
         for ($i = 0; $i < $this->codeNum; $i++) {
             $color = imagecolorallocate($this->im, rand(0, 150), rand(0, 150), rand(0, 150));
-            $x     = floor($this->width / $this->codeNum) * $i + 3;
-            $y     = rand(16, $this->height - 5);
+            $x = floor($this->width / $this->codeNum) * $i + 3;
+            $y = rand(16, $this->height - 5);
             // 更大的字体
             imagettftext($this->im, 16, rand(-30, 30), $x, $y, $color, $this->font, $this->code[$i]);
         }
@@ -90,7 +97,7 @@ class Captcha
         $tempPath = tempnam(sys_get_temp_dir(), 'temp');
 
         imagepng($this->im, $tempPath);
-        if ($fp = fopen($tempPath, "rb", 0)) {
+        if ($fp = fopen($tempPath, 'rb', 0)) {
             $gambar = fread($fp, filesize($tempPath));
             fclose($fp);
 

@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Traits;
 
@@ -49,11 +54,11 @@ trait Uploader
     public function uploadRich()
     {
         $fromWangEditor = false;
-        $file           = request()->file('file');
+        $file = request()->file('file');
 
         if (!$file) {
             $fromWangEditor = true;
-            $file           = request()->file('wangeditor-uploaded-image');
+            $file = request()->file('wangeditor-uploaded-image');
             if (!$file) {
                 $file = request()->file('wangeditor-uploaded-video');
             }

@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Middleware;
 
@@ -26,7 +31,7 @@ class Permission
         }
 
         if (!$user?->allPermissions()
-            ->first(fn(AdminPermission $permission) => $permission->shouldPassThrough($request))) {
+            ->first(fn (AdminPermission $permission) => $permission->shouldPassThrough($request))) {
 
             return Admin::response()->fail('无权访问');
         }

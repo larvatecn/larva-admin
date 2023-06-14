@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Controllers\DevTools;
 
@@ -53,23 +58,23 @@ class ExtensionController extends AdminController
     {
         $property = $extension->composerProperty;
 
-        $name    = $extension->getName();
+        $name = $extension->getName();
         $version = $extension->getVersion();
 
         return [
-            'id'          => $name,
-            'alias'       => $extension->getAlias(),
-            'logo'        => $extension->getLogoBase64(),
-            'name'        => $name,
-            'version'     => $version,
+            'id' => $name,
+            'alias' => $extension->getAlias(),
+            'logo' => $extension->getLogoBase64(),
+            'name' => $name,
+            'version' => $version,
             'description' => $property->description,
-            'authors'     => $property->authors,
-            'homepage'    => $property->homepage,
-            'enabled'     => $extension->enabled(),
-            'extension'   => $extension,
-            'doc'         => $extension->getDocs(),
+            'authors' => $property->authors,
+            'homepage' => $property->homepage,
+            'enabled' => $extension->enabled(),
+            'extension' => $extension,
+            'doc' => $extension->getDocs(),
             'has_setting' => $extension->settingForm() instanceof Form,
-            'used'        => $extension->used(),
+            'used' => $extension->used(),
         ];
     }
 
@@ -102,9 +107,9 @@ class ExtensionController extends AdminController
                 amis('filter-toggler')->align('right'),
             ])->card(
                 Card::make()->header([
-                    'title'           => '${alias || "-" | truncate: 8}',
-                    'subTitle'        => '${name}',
-                    'avatar'          => '${logo || "https://slowlyo.gitee.io/owl-admin-doc/static/logo.png"}',
+                    'title' => '${alias || "-" | truncate: 8}',
+                    'subTitle' => '${name}',
+                    'avatar' => '${logo || "https://slowlyo.gitee.io/owl-admin-doc/static/logo.png"}',
                     'avatarClassName' => 'pull-left thumb-md avatar m-r',
                 ])->body([
                     amis()->label(__('admin.extensions.card.author'))
@@ -130,7 +135,7 @@ class ExtensionController extends AdminController
                                 ->closeOnOutside()
                                 ->closeOnEsc()
                                 ->body(Markdown::make()->name('${doc | raw}')->options([
-                                    'html'   => true,
+                                    'html' => true,
                                     'breaks' => true,
                                 ]))
                         )
@@ -150,9 +155,9 @@ class ExtensionController extends AdminController
                             Dialog::make()->title(__('admin.extensions.setting'))->body(
                                 Service::make()
                                     ->schemaApi([
-                                        'url'    => admin_url('dev_tools/extensions/config_form'),
+                                        'url' => admin_url('dev_tools/extensions/config_form'),
                                         'method' => 'post',
-                                        'data'   => [
+                                        'data' => [
                                             'id' => '${id}',
                                         ],
                                     ])
@@ -161,14 +166,14 @@ class ExtensionController extends AdminController
                     AjaxAction::make()
                         ->label('${enabled ? "' . __('admin.extensions.disable') . '" : "' . __('admin.extensions.enable') . '"}')
                         ->className([
-                            "text-success" => '${!enabled}',
-                            "text-danger"  => '${enabled}',
+                            'text-success' => '${!enabled}',
+                            'text-danger' => '${enabled}',
                         ])
                         ->api([
-                            'url'    => admin_url('dev_tools/extensions/enable'),
+                            'url' => admin_url('dev_tools/extensions/enable'),
                             'method' => 'post',
-                            'data'   => [
-                                'id'      => '${id}',
+                            'data' => [
+                                'id' => '${id}',
                                 'enabled' => '${enabled}',
                             ],
                         ])
@@ -177,9 +182,9 @@ class ExtensionController extends AdminController
                         ->label(__('admin.extensions.uninstall'))
                         ->className('text-danger')
                         ->api([
-                            'url'    => admin_url('dev_tools/extensions/uninstall'),
+                            'url' => admin_url('dev_tools/extensions/uninstall'),
                             'method' => 'post',
-                            'data'   => [
+                            'data' => [
                                 'id' => '${id}',
                             ],
                         ])
@@ -263,7 +268,7 @@ class ExtensionController extends AdminController
      */
     public function more()
     {
-        $q   = request('q');
+        $q = request('q');
         // 加速
         $url = 'http://admin-packagist.dev.slowlyo.top?q=' . $q;
 
@@ -271,7 +276,7 @@ class ExtensionController extends AdminController
 
         // 如果哪天加速服务挂了，就用官方的
         if (!$result) {
-            $url    = 'https://packagist.org/search.json?tags=owl-admin&per_page=15&q=' . $q;
+            $url = 'https://packagist.org/search.json?tags=owl-admin&per_page=15&q=' . $q;
             $result = file_get_contents($url);
         }
 

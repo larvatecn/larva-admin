@@ -1,10 +1,15 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Renderers;
 
 /**
  * 下拉按钮渲染器。 文档：https://aisuda.bce.baidu.com/amis/zh-CN/components/dropdown-button
- * 
+ *
  * @author slowlyo
  * @version v3.0.0
  * @since 2023-05-13

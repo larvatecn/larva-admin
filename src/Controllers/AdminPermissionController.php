@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Controllers;
 
@@ -110,7 +115,7 @@ class AdminPermissionController extends AdminController
 
     private function getHttpMethods(): array
     {
-        return collect(AdminPermission::$httpMethods)->map(fn($method) => [
+        return collect(AdminPermission::$httpMethods)->map(fn ($method) => [
             'value' => $method,
             'label' => $method,
         ])->toArray();
@@ -155,12 +160,12 @@ class AdminPermissionController extends AdminController
             $_httpPath = $menu['url_type'] == AdminMenu::TYPE_ROUTE ? $this->getHttpPath($menu['url']) : '';
 
             $permissions[] = [
-                'id'         => $menu['id'],
-                'name'       => $menu['title'],
-                'slug'       => (string)Str::uuid(),
-                'http_path'  => json_encode($_httpPath ? [$_httpPath] : ''),
-                'order'      => $menu['order'],
-                'parent_id'  => $menu['parent_id'],
+                'id' => $menu['id'],
+                'name' => $menu['title'],
+                'slug' => (string)Str::uuid(),
+                'http_path' => json_encode($_httpPath ? [$_httpPath] : ''),
+                'order' => $menu['order'],
+                'parent_id' => $menu['parent_id'],
                 'created_at' => $menu['created_at'],
                 'updated_at' => $menu['updated_at'],
             ];
@@ -174,14 +179,14 @@ class AdminPermissionController extends AdminController
             $query = DB::table('admin_permission_menu');
             $query->insert([
                 'permission_id' => $item['id'],
-                'menu_id'       => $item['id'],
+                'menu_id' => $item['id'],
             ]);
 
             $_id = $item['id'];
             while ($item['parent_id'] != 0) {
                 (clone $query)->insert([
                     'permission_id' => $_id,
-                    'menu_id'       => $item['parent_id'],
+                    'menu_id' => $item['parent_id'],
                 ]);
 
                 $item = AdminMenu::query()->find($item['parent_id']);

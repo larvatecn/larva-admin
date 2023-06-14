@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Extend;
 
@@ -254,8 +259,8 @@ class Manager
         $composerProperty = Composer::parse($directory . '/composer.json');
 
         $serviceProvider = $composerProperty->get('extra.owl-admin');
-        $psr4            = $composerProperty->get('autoload.psr-4');
-        $files           = $composerProperty->get('autoload.files');
+        $psr4 = $composerProperty->get('autoload.psr-4');
+        $files = $composerProperty->get('autoload.files');
 
         if (!$serviceProvider || !$psr4) {
             return;
@@ -391,7 +396,7 @@ class Manager
             if (count($extensions) === 1) {
                 // 双层目录
                 $directory = current($extensions);
-            } else if (count($results = $this->scandir($tempPath)) === 1) {
+            } elseif (count($results = $this->scandir($tempPath)) === 1) {
                 // 单层目录
                 $directory = current($results);
             }

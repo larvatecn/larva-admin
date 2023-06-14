@@ -1,10 +1,15 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 use Larva\Admin\Controllers;
 
 \Illuminate\Support\Facades\Route::group([
-    'domain'     => config('admin.route.domain'),
-    'prefix'     => config('admin.route.prefix'),
+    'domain' => config('admin.route.domain'),
+    'prefix' => config('admin.route.prefix'),
     'middleware' => config('admin.route.middleware'),
 ], function (\Illuminate\Routing\Router $router) {
     $router->get('/login', [Controllers\AuthController::class, 'loginPage']);
@@ -54,7 +59,7 @@ use Larva\Admin\Controllers;
         ]);
     });
 
-    if(config('admin.show_development_tools')){
+    if(config('admin.show_development_tools')) {
         // 开发工具
         $router->group(['prefix' => 'dev_tools'], function (\Illuminate\Routing\Router $router) {
             $router->get('/', [Controllers\DevTools\CodeGeneratorController::class, 'index']);

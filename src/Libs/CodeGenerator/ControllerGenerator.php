@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Libs\CodeGenerator;
 
@@ -64,7 +69,7 @@ class ControllerGenerator extends BaseGenerator
     {
         $name = str_replace('/', '\\', $name);
         $path = static::guessClassFileName($name);
-        $dir  = dirname($path);
+        $dir = dirname($path);
 
         $files = app('files');
 
@@ -74,7 +79,7 @@ class ControllerGenerator extends BaseGenerator
 
         if ($files->exists($path) && !$this->overwrite) {
             abort(HttpResponse::HTTP_BAD_REQUEST, "Controller [$name] already exists!");
-        }else{
+        } else {
             $files->delete($path);
         }
 
@@ -109,7 +114,7 @@ class ControllerGenerator extends BaseGenerator
     {
         $list = collect();
 
-        $primaryKey     = $this->primaryKey ?? 'id';
+        $primaryKey = $this->primaryKey ?? 'id';
         $primaryKeyName = strtoupper($primaryKey);
         $list->push("TableColumn::make()->name('{$primaryKey}')->label('{$primaryKeyName}')->sortable()");
 
@@ -164,7 +169,7 @@ class ControllerGenerator extends BaseGenerator
     {
         $detail = collect();
 
-        $primaryKey     = $this->primaryKey ?? 'id';
+        $primaryKey = $this->primaryKey ?? 'id';
         $primaryKeyName = strtoupper($primaryKey);
         $detail->push("TextControl::make()->static()->name('{$primaryKey}')->label('{$primaryKeyName}')");
 

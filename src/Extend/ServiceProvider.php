@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Extend;
 
@@ -487,12 +492,14 @@ abstract class ServiceProvider extends LaravelServiceProvider
      */
     public function registerRoutes($callback)
     {
-        Route::group(array_filter([
-            'domain'     => config('admin.route.domain'),
-            'prefix'     => config('admin.route.prefix'),
+        Route::group(
+            array_filter([
+            'domain' => config('admin.route.domain'),
+            'prefix' => config('admin.route.prefix'),
             'middleware' => config('admin.route.middleware'),
         ]),
-            $callback);
+            $callback
+        );
     }
 
     /**
@@ -598,9 +605,9 @@ abstract class ServiceProvider extends LaravelServiceProvider
             ->wrapWithPanel(false)
             ->data(['extension' => $this->getName()])
             ->initApi([
-                'url'    => admin_url('dev_tools/extensions/get_config'),
+                'url' => admin_url('dev_tools/extensions/get_config'),
                 'method' => 'POST',
-                'data'   => [
+                'data' => [
                     'extension' => $this->getName(),
                 ],
             ])

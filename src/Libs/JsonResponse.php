@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Libs;
 
@@ -9,8 +14,8 @@ class JsonResponse
 {
     /** @var array 额外参数 */
     private array $additionalData = [
-        'status'            => 0,
-        'msg'               => '',
+        'status' => 0,
+        'msg' => '',
         'doNotDisplayToast' => 0,
     ];
 
@@ -18,7 +23,7 @@ class JsonResponse
      * @param string $message
      * @param null $data
      *
-     * @return  \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\JsonResponse
      */
     public function fail(string $message = 'Service error', $data = null): \Illuminate\Http\JsonResponse
     {
@@ -69,7 +74,7 @@ class JsonResponse
 
     private function setFailMsg($message)
     {
-        $this->additionalData['msg']    = $message;
+        $this->additionalData['msg'] = $message;
         $this->additionalData['status'] = 1;
     }
 

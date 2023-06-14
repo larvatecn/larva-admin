@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Console;
 
@@ -31,7 +36,7 @@ class ResetPasswordCommand extends Command
         askForUserName:
         $username = $this->askWithCompletion('Please enter a username who needs to reset his password', $users->pluck('username')->toArray());
 
-        $user = $users->first(fn($user) => $user->username == $username);
+        $user = $users->first(fn ($user) => $user->username == $username);
 
         if (is_null($user)) {
             $this->error('The user you entered is not exists');

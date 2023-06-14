@@ -1,10 +1,15 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Renderers;
 
 /**
  * Nav 导航渲染器 文档：https://aisuda.bce.baidu.com/amis/zh-CN/components/nav
- * 
+ *
  * @author slowlyo
  * @version v3.0.0
  * @since 2023-05-13
@@ -215,7 +220,7 @@ class Nav extends BaseRenderer
     }
 
     /**
-     * true 为垂直排列，false 为水平排列类似如 tabs。 可选值: 1 | 
+     * true 为垂直排列，false 为水平排列类似如 tabs。 可选值: 1 |
      */
     public function stacked($value = true)
     {

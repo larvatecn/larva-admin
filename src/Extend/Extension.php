@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Extend;
 
@@ -54,7 +59,7 @@ class Extension
         $this->dirs[] = 'public/extensions/' . $name;
 
         $this->filesystem = app('files');
-        $this->namespace  = $namespace;
+        $this->namespace = $namespace;
 
         $this->extensionDir = admin_extension_path();
 
@@ -62,7 +67,7 @@ class Extension
             $this->makeDir();
         }
 
-        $this->package       = str_replace('.', '/', $name);
+        $this->package = str_replace('.', '/', $name);
         $this->extensionName = str_replace('/', '.', $this->package);
 
         $this->basePath = rtrim($this->extensionDir, '/') . '/' . ltrim($this->package, '/');
@@ -140,7 +145,7 @@ class Extension
     {
         $files = [
             __DIR__ . '/stubs/.gitignore.stub' => '.gitignore',
-            __DIR__ . '/stubs/README.md.stub'  => 'README.md',
+            __DIR__ . '/stubs/README.md.stub' => 'README.md',
         ];
 
         $this->copy($files);

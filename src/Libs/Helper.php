@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Libs;
 
@@ -28,11 +33,11 @@ class Helper
         }
 
         if (is_array($value)) {
-        } else if ($value instanceof Jsonable) {
+        } elseif ($value instanceof Jsonable) {
             $value = json_decode($value->toJson(), true);
-        } else if ($value instanceof Arrayable) {
+        } elseif ($value instanceof Arrayable) {
             $value = $value->toArray();
-        } else if (is_string($value)) {
+        } elseif (is_string($value)) {
             $array = null;
 
             try {

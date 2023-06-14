@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Middleware;
 
@@ -11,8 +16,8 @@ class EnsureFrontendRequestsAreStateful
     /**
      * Handle the incoming requests.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  callable  $next
+     * @param \Illuminate\Http\Request $request
+     * @param callable $next
      * @return \Illuminate\Http\Response
      */
     public function handle($request, $next)
@@ -50,7 +55,7 @@ class EnsureFrontendRequestsAreStateful
     /**
      * Determine if the given request is from the first-party application frontend.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return bool
      */
     public static function fromFrontend($request)

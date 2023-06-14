@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Controllers;
 
@@ -37,14 +42,14 @@ class AuthController extends AdminController
                 'password' => 'required',
             ], [
                 'username' . '.required' => __('admin.required', ['attribute' => __('admin.username')]),
-                'password.required'      => __('admin.required', ['attribute' => __('admin.password')]),
+                'password.required' => __('admin.required', ['attribute' => __('admin.password')]),
             ]);
 
             if ($validator->fails()) {
                 abort(Response::HTTP_BAD_REQUEST, $validator->errors()->first());
             }
-            $adminModel = config("admin.auth.model", AdminUser::class);
-            $user       = $adminModel::query()->where('username', $request->username)->first();
+            $adminModel = config('admin.auth.model', AdminUser::class);
+            $user = $adminModel::query()->where('username', $request->username)->first();
             if ($user && Hash::check($request->password, $user->password)) {
                 $token = $user->createToken('admin')->plainTextToken;
 
@@ -59,7 +64,7 @@ class AuthController extends AdminController
 
     public function loginPage()
     {
-        $captcha       = null;
+        $captcha = null;
         $enableCaptcha = config('admin.auth.login_captcha');
 
         // 验证码
@@ -116,12 +121,12 @@ class AuthController extends AdminController
         }
         $form->onEvent(array_merge([
             // 页面初始化事件
-            'inited'     => [
+            'inited' => [
                 'actions' => [
                     // 读取本地存储的登录参数
                     [
                         'actionType' => 'custom',
-                        'script'     => <<<JS
+                        'script' => <<<JS
 let loginParams = localStorage.getItem('loginParams')
 if(loginParams){
     loginParams = JSON.parse(loginParams)
@@ -143,7 +148,7 @@ JS
                     // 保存登录参数到本地, 并跳转到首页
                     [
                         'actionType' => 'custom',
-                        'script'     => <<<JS
+                        'script' => <<<JS
 let _data = {}
 if(event.data.remember_me){
     _data = { username: event.data.username, password: event.data.password }
@@ -170,15 +175,15 @@ JS,
         return amisMake()->Page()->css([
             '.captcha-box .cxd-Image--thumb' => [
                 'padding' => '0',
-                'cursor'  => 'pointer',
-                'border'  => 'var(--Form-input-borderWidth) solid var(--Form-input-borderColor)',
+                'cursor' => 'pointer',
+                'border' => 'var(--Form-input-borderWidth) solid var(--Form-input-borderColor)',
 
-                'border-top-right-radius'    => '4px',
+                'border-top-right-radius' => '4px',
                 'border-bottom-right-radius' => '4px',
             ],
-            '.cxd-Image-thumb'               => ['width' => 'auto'],
+            '.cxd-Image-thumb' => ['width' => 'auto'],
         ])->body(
-            amisMake()->Wrapper()->className("h-screen w-full flex items-center justify-center")->body($card)
+            amisMake()->Wrapper()->className('h-screen w-full flex items-center justify-center')->body($card)
         );
     }
 
@@ -197,6 +202,10 @@ JS,
         return $this->response()->success(compact('captcha_img', 'sys_captcha'));
     }
 
+    /**
+     * 退出登录
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
     public function logout(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
         $this->guard()->user()->currentAccessToken()->delete();
@@ -274,16 +283,23 @@ JS,
         return $this->response()->success(Page::make()->body($form));
     }
 
+    /**
+     * 保存用户设置
+     * 
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
+     */
     public function saveUserSetting(): \Illuminate\Http\JsonResponse|\Illuminate\Http\Resources\Json\JsonResource
     {
-        $result = $this->service->updateUserSetting($this->user()->id,
+        $result = $this->service->updateUserSetting(
+            $this->user()->id,
             request()->only([
                 'avatar',
                 'name',
                 'old_password',
                 'password',
                 'confirm_password',
-            ]));
+            ])
+        );
 
         return $this->autoResponse($result);
     }

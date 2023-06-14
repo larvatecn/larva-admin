@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin;
 
@@ -57,15 +62,15 @@ class Admin
             if ($item['parent_id'] == $parentId) {
                 $idStr = "[{$item['id']}]";
                 $_temp = [
-                    'name'      => $parentName ? $parentName . '-' . $idStr : $idStr,
-                    'path'      => $item['url'],
+                    'name' => $parentName ? $parentName . '-' . $idStr : $idStr,
+                    'path' => $item['url'],
                     'component' => 'amis',
-                    'is_home'   => $item['is_home'],
-                    'is_link'   => $item['url_type'] == AdminMenu::TYPE_LINK,
-                    'meta'      => [
+                    'is_home' => $item['is_home'],
+                    'is_link' => $item['url_type'] == AdminMenu::TYPE_LINK,
+                    'meta' => [
                         'title' => $item['title'],
-                        'icon'  => $item['icon'] ?? '-',
-                        'hide'  => $item['visible'] == 0,
+                        'icon' => $item['icon'] ?? '-',
+                        'hide' => $item['visible'] == 0,
                         'order' => $item['order'],
                     ],
                 ];
@@ -74,7 +79,7 @@ class Admin
 
                 if (!empty($children)) {
                     $_temp['component'] = 'amis';
-                    $_temp['children']  = $children;
+                    $_temp['children'] = $children;
                 }
 
                 $data[] = $_temp;
@@ -95,13 +100,13 @@ class Admin
             return [];
         }
 
-        $menu = fn($action, $path) => [
-            'name'      => $item['name'] . '-' . $action,
-            'path'      => $url . $path,
+        $menu = fn ($action, $path) => [
+            'name' => $item['name'] . '-' . $action,
+            'path' => $url . $path,
             'component' => 'amis',
-            'meta'      => [
-                'hide'  => true,
-                'icon'  => Arr::get($item, 'meta.icon'),
+            'meta' => [
+                'hide' => true,
+                'icon' => Arr::get($item, 'meta.icon'),
                 'title' => Arr::get($item, 'meta.title') . ' - ' . __('admin.' . $action),
             ],
         ];
@@ -171,7 +176,7 @@ class Admin
     public static function mixMiddlewareGroup(array $mix = [])
     {
         $router = app('router');
-        $group  = $router->getMiddlewareGroups()['admin'] ?? [];
+        $group = $router->getMiddlewareGroups()['admin'] ?? [];
 
         if ($mix) {
             $finalGroup = [];

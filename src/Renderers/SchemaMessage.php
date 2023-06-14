@@ -1,10 +1,15 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Renderers;
 
 /**
  * 消息文案配置，记住这个优先级是最低的，如果你的接口返回了 msg，接口返回的优先。
- * 
+ *
  * @author slowlyo
  * @version v3.0.0
  * @since 2023-05-13

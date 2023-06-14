@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Services;
 
@@ -63,7 +68,7 @@ class AdminUserService extends AdminService
     {
         return $this->query()
             ->where('username', $username)
-            ->when($id, fn($query) => $query->where('id', '<>', $id))
+            ->when($id, fn ($query) => $query->where('id', '<>', $id))
             ->exists();
     }
 
@@ -99,8 +104,8 @@ class AdminUserService extends AdminService
 
             $data['password'] = bcrypt($password);
 
-            unset($data['confirm_password']);
-            unset($data['old_password']);
+            unset($data['confirm_password'], $data['old_password']);
+
         }
 
         return true;

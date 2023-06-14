@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Models;
 
@@ -20,7 +25,7 @@ class AdminPermission extends BaseModel
 
     protected $casts = [
         'http_method' => 'array',
-        'http_path'   => 'array',
+        'http_path' => 'array',
     ];
 
     protected $fillable = ['sign'];
@@ -36,7 +41,7 @@ class AdminPermission extends BaseModel
         if (empty($this->http_method) && empty($this->http_path)) {
             return true;
         }
-        $method  = $this->http_method;
+        $method = $this->http_method;
         $matches = array_map(function ($path) use ($method) {
             $path = trim(config('admin.route.prefix'), '/') . $path;
             if (Str::contains($path, ':')) {

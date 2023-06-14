@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Controllers;
 
@@ -96,7 +101,7 @@ class AdminMenuController extends AdminController
             'submitSucc' => [
                 'actions' => [
                     'actionType' => 'custom',
-                    'script'     => 'window.$owl.refreshRoutes()',
+                    'script' => 'window.$owl.refreshRoutes()',
                 ],
             ],
         ]);

@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Libs\CodeGenerator;
 
@@ -31,7 +36,7 @@ class ModelGenerator extends BaseGenerator
     {
         $name = str_replace('/', '\\', $name);
         $path = static::guessClassFileName($name);
-        $dir  = dirname($path);
+        $dir = dirname($path);
 
         $files = app('files');
 
@@ -41,7 +46,7 @@ class ModelGenerator extends BaseGenerator
 
         if ($files->exists($path) && !$this->overwrite) {
             abort(HttpResponse::HTTP_BAD_REQUEST, "Model [$name] already exists!");
-        }else{
+        } else {
             $files->delete($path);
         }
 
@@ -67,7 +72,7 @@ class ModelGenerator extends BaseGenerator
 
         if ($this->needSoftDelete) {
             $import = 'use Illuminate\\Database\\Eloquent\\SoftDeletes;';
-            $use    = 'use SoftDeletes;';
+            $use = 'use SoftDeletes;';
         }
 
         $stub = str_replace(['{{ ImportSoftDelete }}', '{{ SoftDelete }}'], [$import, $use], $stub);

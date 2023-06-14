@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Controllers\DevTools;
 
@@ -41,7 +46,7 @@ class CodeGeneratorController extends AdminController
             ->resetAfterSubmit()
             ->api($this->getStorePath())
             ->data([
-                'table_info'         => $databaseColumns,
+                'table_info' => $databaseColumns,
                 'table_primary_keys' => Generator::make()->getDatabasePrimaryKeys(),
             ])
             ->feedback(['title' => '', 'body' => amisMake()->Tpl()->tpl('${result | raw}')])
@@ -72,7 +77,7 @@ class CodeGeneratorController extends AdminController
                                     ->options(
                                         $databaseColumns->map(function ($item, $index) {
                                             return [
-                                                'label'    => $index,
+                                                'label' => $index,
                                                 'children' => $item->keys()->map(function ($item) use ($index) {
                                                     return ['value' => $item . '-' . $index, 'label' => $item];
                                                 }),
@@ -84,13 +89,13 @@ class CodeGeneratorController extends AdminController
                                             'actions' => [
                                                 // 更新 table_name 的值
                                                 [
-                                                    'actionType'  => 'setValue',
+                                                    'actionType' => 'setValue',
                                                     'componentId' => 'code_generator_form',
-                                                    'args'        => [
+                                                    'args' => [
                                                         'value' => [
-                                                            'table_name'  => '${SPLIT(event.data.value, "-")[0]}',
+                                                            'table_name' => '${SPLIT(event.data.value, "-")[0]}',
                                                             'primary_key' => '${table_primary_keys[SPLIT(event.data.value, "-")[1]][SPLIT(event.data.value, "-")[0]]}',
-                                                            'columns'     => '${table_info[SPLIT(event.data.value, "-")[1]][SPLIT(event.data.value, "-")[0]]}',
+                                                            'columns' => '${table_info[SPLIT(event.data.value, "-")[1]][SPLIT(event.data.value, "-")[0]]}',
                                                         ],
                                                     ],
                                                 ],
@@ -167,14 +172,15 @@ class CodeGeneratorController extends AdminController
                                 __('admin.code_generators.remark1') .
                                 "<a href='https://learnku.com/docs/laravel/9.x/migrations/12248#b419dd' target='_blank'>" .
                                 __('admin.code_generators.remark2') .
-                                "</a>, " . __('admin.code_generators.remark3')
+                                '</a>, ' . __('admin.code_generators.remark3')
                             ),
                         amisMake()->SelectControl('index', __('admin.code_generators.index'))
                             ->options(
-                                collect(['index', 'unique'])->map(fn($value) => [
+                                collect(['index', 'unique'])->map(fn ($value) => [
                                     'label' => $value,
                                     'value' => $value,
-                                ]))
+                                ])
+                            )
                             ->clearable(),
                         amisMake()->SwitchControl('nullable', __('admin.code_generators.nullable'))->width(60),
                     ])
@@ -184,13 +190,13 @@ class CodeGeneratorController extends AdminController
 
     public function store(Request $request)
     {
-        $needs          = collect($request->needs);
-        $columns        = collect($request->columns);
+        $needs = collect($request->needs);
+        $columns = collect($request->columns);
         $successMessage = function ($type, $path) {
             return "<b class='text-success'>{$type} generated successfully!</b><br>{$path}<br><br>";
         };
 
-        $paths   = [];
+        $paths = [];
         $message = '';
         try {
             // Model
@@ -282,49 +288,49 @@ class CodeGeneratorController extends AdminController
     private function css()
     {
         return [
-            '.cxd-Table-content'                             => ['padding-bottom' => '15px'],
-            '.item-comment'                                  => [
-                'width'         => '220px',
-                'height'        => '18px',
-                'overflow'      => 'hidden',
+            '.cxd-Table-content' => ['padding-bottom' => '15px'],
+            '.item-comment' => [
+                'width' => '220px',
+                'height' => '18px',
+                'overflow' => 'hidden',
                 'text-overflow' => 'ellipsis',
-                'white-space'   => 'nowrap',
-                'color'         => '#a9aeb8',
-                'font-size'     => '12px',
+                'white-space' => 'nowrap',
+                'color' => '#a9aeb8',
+                'font-size' => '12px',
             ],
-            '.column-name'                                   => [
-                'max-width'     => '160px',
-                'overflow'      => 'hidden',
+            '.column-name' => [
+                'max-width' => '160px',
+                'overflow' => 'hidden',
                 'text-overflow' => 'ellipsis',
-                'white-space'   => 'nowrap',
-                'font-weight'   => 'bold',
+                'white-space' => 'nowrap',
+                'font-weight' => 'bold',
             ],
-            '.custom-subform-item'                           => [
-                'border'        => '1px solid #eee',
+            '.custom-subform-item' => [
+                'border' => '1px solid #eee',
                 'border-radius' => '4px',
-                'margin'        => '5px',
-                'width'         => '16%',
-                'padding'       => '10px',
-                'min-width'     => '220px',
-                'position'      => 'relative',
+                'margin' => '5px',
+                'width' => '16%',
+                'padding' => '10px',
+                'min-width' => '220px',
+                'position' => 'relative',
             ],
             '.custom-subform-item .cxd-SubForm-valueDragBar' => [
                 'position' => 'absolute',
-                'top'      => '5px',
-                'left'     => '10px',
+                'top' => '5px',
+                'left' => '10px',
             ],
-            '.custom-subform-item .cxd-SubForm-valueLabel'   => [
+            '.custom-subform-item .cxd-SubForm-valueLabel' => [
                 'margin-left' => '20px',
             ],
-            '.custom-subform-item .cxd-SubForm-valueEdit'    => [
+            '.custom-subform-item .cxd-SubForm-valueEdit' => [
                 'position' => 'absolute',
-                'top'      => '5px',
-                'right'    => '30px',
+                'top' => '5px',
+                'right' => '30px',
             ],
-            '.custom-subform-item .cxd-SubForm-valueDel'     => [
+            '.custom-subform-item .cxd-SubForm-valueDel' => [
                 'position' => 'absolute',
-                'top'      => '5px',
-                'right'    => '10px',
+                'top' => '5px',
+                'right' => '10px',
             ],
         ];
     }

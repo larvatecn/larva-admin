@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin;
 
@@ -21,12 +26,12 @@ class AdminServiceProvider extends ServiceProvider
     ];
 
     protected array $routeMiddleware = [
-        'admin.auth'       => Middleware\Authenticate::class,
-        'admin.bootstrap'  => Middleware\Bootstrap::class,
-        'admin.session'    => Middleware\Session::class,
+        'admin.auth' => Middleware\Authenticate::class,
+        'admin.bootstrap' => Middleware\Bootstrap::class,
+        'admin.session' => Middleware\Session::class,
         'admin.permission' => Middleware\Permission::class,
-        'sanctum'          => Middleware\EnsureFrontendRequestsAreStateful::class,
-        'substitute'       => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'sanctum' => Middleware\EnsureFrontendRequestsAreStateful::class,
+        'substitute' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
     ];
 
     protected array $middlewareGroups = [
@@ -105,7 +110,7 @@ class AdminServiceProvider extends ServiceProvider
     {
         $this->app->singleton('admin.extend', Manager::class);
         $this->app->singleton('admin.context', Context::class);
-        $this->app->singleton('admin.setting', fn() => settings());
+        $this->app->singleton('admin.setting', fn () => settings());
         $this->app->singleton('admin.asset', Asset::class);
     }
 

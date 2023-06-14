@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Services;
 
@@ -13,7 +18,7 @@ abstract class AdminService
 
     public static function make(): static
     {
-        return new static;
+        return new static();
     }
 
     /**
@@ -21,7 +26,7 @@ abstract class AdminService
      */
     public function getModel(): Model
     {
-        return new $this->modelName;
+        return new $this->modelName();
     }
 
     public function primaryKey()
@@ -118,7 +123,7 @@ abstract class AdminService
     public function update($primaryKey, $data): bool
     {
         $columns = $this->getTableColumns();
-        $model   = $this->query()->whereKey($primaryKey)->first();
+        $model = $this->query()->whereKey($primaryKey)->first();
 
         foreach ($data as $k => $v) {
             if (!in_array($k, $columns)) {
@@ -141,7 +146,7 @@ abstract class AdminService
     public function store($data): bool
     {
         $columns = $this->getTableColumns();
-        $model   = $this->getModel();
+        $model = $this->getModel();
 
         foreach ($data as $k => $v) {
             if (!in_array($k, $columns)) {

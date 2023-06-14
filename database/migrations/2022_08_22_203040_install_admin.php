@@ -14,35 +14,39 @@ return new class extends Migration {
     {
         Schema::create('admin_users', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedBigInteger('user_id')->comment('前台用户');
             $table->string('username', 120)->unique();
             $table->string('password', 80);
             $table->string('name');
             $table->string('avatar')->nullable();
             $table->string('remember_token', 100)->nullable();
             $table->timestamps();
+            $table->comment('管理员用户表');
         });
 
         Schema::create('admin_roles', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name', 50)->unique();
-            $table->string('slug', 50)->unique();
+            $table->increments('id')->comment('角色ID');
+            $table->string('name', 50)->unique()->comment('角色名称');
+            $table->string('slug', 50)->unique()->comment('角色标识');
             $table->timestamps();
+            $table->comment('管理员角色表');
         });
 
         Schema::create('admin_permissions', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name', 50)->unique();
-            $table->string('slug', 50)->unique();
-            $table->text('http_method')->nullable();
-            $table->text('http_path')->nullable();
-            $table->integer('order')->default(0);
-            $table->integer('parent_id')->default(0);
+            $table->increments('id')->comment('权限ID');
+            $table->string('name', 50)->unique()->comment('权限名称');
+            $table->string('slug', 50)->unique()->comment('权限标识');
+            $table->text('http_method')->nullable()->comment('HTTP方法');
+            $table->text('http_path')->nullable()->comment('HTTP Path');
+            $table->integer('order')->default(0)->comment('排序');
+            $table->integer('parent_id')->default(0)->comment('父权限');
             $table->timestamps();
+            $table->comment('管理员权限表');
         });
 
         Schema::create('admin_menus', function (Blueprint $table) {
             $table->increments('id')->comment('菜单ID');
-            $table->integer('parent_id')->default(0);
+            $table->integer('parent_id')->default(0)->comment('父菜单ID');
             $table->integer('order')->default(0)->comment('排序');
             $table->string('title', 100)->comment('菜单名称');
             $table->string('icon', 100)->nullable()->comment('菜单图标');
@@ -57,30 +61,34 @@ return new class extends Migration {
         });
 
         Schema::create('admin_role_users', function (Blueprint $table) {
-            $table->integer('role_id');
-            $table->integer('user_id');
+            $table->integer('role_id')->comment('角色ID');
+            $table->integer('user_id')->comment('用户ID');
             $table->index(['role_id', 'user_id']);
             $table->timestamps();
+            $table->comment('管理员角色用户表');
         });
 
         Schema::create('admin_role_permissions', function (Blueprint $table) {
-            $table->integer('role_id');
-            $table->integer('permission_id');
+            $table->integer('role_id')->comment('角色ID');
+            $table->integer('permission_id')->comment('权限ID');
             $table->index(['role_id', 'permission_id']);
             $table->timestamps();
+            $table->comment('管理员角色权限表');
         });
 
         Schema::create('admin_permission_menu', function (Blueprint $table) {
-            $table->integer('permission_id');
-            $table->integer('menu_id');
+            $table->integer('permission_id')->comment('权限ID');
+            $table->integer('menu_id')->comment('菜单ID');
             $table->index(['permission_id', 'menu_id']);
             $table->timestamps();
+            $table->comment('管理员权限菜单表');
         });
 
         Schema::create('admin_settings', function (Blueprint $table) {
-            $table->string('key');
-            $table->longText('values');
+            $table->string('key')->comment('配置Key');;
+            $table->longText('values')->comment('配置值');;
             $table->timestamps();
+            $table->comment('系统配置表');
         });
 
         Schema::create('admin_extensions', function (Blueprint $table) {

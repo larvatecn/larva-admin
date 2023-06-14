@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Libs\CodeGenerator;
 
@@ -49,7 +54,7 @@ class MigrationGenerator extends BaseMigrationCreator
     {
         empty($this->columns) && abort(HttpResponse::HTTP_BAD_REQUEST, 'Table fields can\'t be empty');
 
-        $rows   = [];
+        $rows = [];
         $rows[] = "\$table->increments('{$this->primaryKey}');\n";
 
         foreach ($this->columns as $field) {
@@ -79,7 +84,7 @@ class MigrationGenerator extends BaseMigrationCreator
 
             if (Arr::get($field, 'nullable', false)) {
                 $column .= '->nullable()';
-            } else if (!$hasDefault && $field['type'] === 'string') {
+            } elseif (!$hasDefault && $field['type'] === 'string') {
                 $column .= "->default('')";
             }
 

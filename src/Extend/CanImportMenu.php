@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Extend;
 
@@ -14,11 +19,11 @@ trait CanImportMenu
     protected $menu = [];
 
     protected array $menuValidationRules = [
-        'parent'   => 'nullable',
-        'title'    => 'required',
-        'url'      => 'nullable',
+        'parent' => 'nullable',
+        'title' => 'required',
+        'url' => 'nullable',
         'url_type' => 'nullable',
-        'icon'     => 'nullable',
+        'icon' => 'nullable',
     ];
 
     /**
@@ -59,11 +64,11 @@ trait CanImportMenu
 
             $menuModel::create([
                 'parent_id' => $this->getParentMenuId($menu['parent'] ?? 0),
-                'order'     => $lastOrder + 1,
-                'title'     => $menu['title'],
-                'icon'      => (string)($menu['icon'] ?? ''),
-                'url'       => (string)($menu['url'] ?? ''),
-                'url_type'  => (string)($menu['url_type'] ?? 1),
+                'order' => $lastOrder + 1,
+                'title' => $menu['title'],
+                'icon' => (string)($menu['icon'] ?? ''),
+                'url' => (string)($menu['url'] ?? ''),
+                'url_type' => (string)($menu['url_type'] ?? 1),
                 'extension' => $this->getName(),
             ]);
         }

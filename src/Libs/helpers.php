@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 use Illuminate\Support\Facades\Schema;
 
@@ -57,7 +62,7 @@ if (!function_exists('admin_resource_full_path')) {
         }
         if (url()->isValidUrl($path) || mb_strpos($path, 'data:image') === 0) {
             $src = $path;
-        } else if ($server) {
+        } elseif ($server) {
             $src = rtrim($server, '/') . '/' . ltrim($path, '/');
         } else {
             $disk = config('admin.upload.disk');
@@ -136,8 +141,8 @@ if (!function_exists('file_upload_handle')) {
         $storage = \Illuminate\Support\Facades\Storage::disk(config('admin.upload.disk'));
 
         return \Illuminate\Database\Eloquent\Casts\Attribute::make(
-            get: fn($value) => $value ? $storage->url($value) : '',
-            set: fn($value) => str_replace($storage->url(''), '', $value)
+            get: fn ($value) => $value ? $storage->url($value) : '',
+            set: fn ($value) => str_replace($storage->url(''), '', $value)
         );
     }
 }
@@ -165,7 +170,7 @@ if (!function_exists('settings')) {
     /**
      * Get setting value or object.
      *
-     * @param  mixed|null  $default
+     * @param mixed|null $default
      * @return \Larva\Admin\Services\AdminSettingService|mixed
      */
     function settings(string $key = '', mixed $default = null, bool $fresh = false)

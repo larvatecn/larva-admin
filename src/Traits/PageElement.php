@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Traits;
 
@@ -264,12 +269,12 @@ trait PageElement
 
         $primaryKey = $this->service->primaryKey();
 
-        $downloadPath   = '/' . admin_url('_download_export', true);
-        $exportPath     = $this->getExportPath();
-        $pageNoData     = __('admin.export.page_no_data');
+        $downloadPath = '/' . admin_url('_download_export', true);
+        $exportPath = $this->getExportPath();
+        $pageNoData = __('admin.export.page_no_data');
         $selectedNoData = __('admin.export.selected_rows_no_data');
-        $event          = fn($script) => ['click' => ['actions' => [['actionType' => 'custom', 'script' => $script]]]];
-        $doAction       = <<<JS
+        $event = fn ($script) => ['click' => ['actions' => [['actionType' => 'custom', 'script' => $script]]]];
+        $doAction = <<<JS
 doAction([
     { actionType: "ajax", args: { api: { url: url.toString(), method: "get" } } },
     {
@@ -279,9 +284,10 @@ doAction([
     }
 ])
 JS;
-        $buttons        = [
+        $buttons = [
             amisMake()->VanillaAction()->label(__('admin.export.all'))->onEvent(
-                $event(<<<JS
+                $event(
+                    <<<JS
 let data = event.data.__super.__super
 let params = Object.keys(data).filter(key => key !== "page" && key !== "__super").reduce((obj, key) => {
     obj[key] = data[key];
@@ -291,11 +297,11 @@ let url = new URL("{$exportPath}", window.location.origin)
 Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
 {$doAction}
 JS
-
                 )
             ),
             amisMake()->VanillaAction()->label(__('admin.export.page'))->onEvent(
-                $event(<<<JS
+                $event(
+                    <<<JS
 let ids = event.data.items.map(item => item.{$primaryKey})
 if(ids.length === 0) { return doAction({ actionType: "toast", args: { msgType: "warning", msg: "{$pageNoData}" } }) }
 let url = new URL("{$exportPath}", window.location.origin)
@@ -308,7 +314,8 @@ JS
 
         if (!$disableSelectedItem) {
             $buttons[] = amisMake()->VanillaAction()->label(__('admin.export.selected_rows'))->onEvent(
-                $event(<<<JS
+                $event(
+                    <<<JS
 let ids = event.data.selectedItems.map(item => item.{$primaryKey})
 if(ids.length === 0) { return doAction({ actionType: "toast", args: { msgType: "warning", msg: "{$selectedNoData}" } }) }
 let url = new URL("{$exportPath}", window.location.origin)

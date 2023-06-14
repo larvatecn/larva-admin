@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Traits;
 
@@ -23,12 +28,12 @@ trait Export
 
         // listQuery() 为列表查询条件，与获取列表数据一致
         $query = $this->service->listQuery()
-            ->when($ids, fn($query) => $query->whereIn($this->service->primaryKey(), explode(',', $ids)));
+            ->when($ids, fn ($query) => $query->whereIn($this->service->primaryKey(), explode(',', $ids)));
 
         // 此处使用 laravel-excel 导出，可自行修改
         AdminExport::make($query)
             ->setHeadings($this->exportHeadings())
-            ->setMap(fn($row) => $this->exportColumns($row))
+            ->setMap(fn ($row) => $this->exportColumns($row))
             ->store($path);
 
         return $this->response()->success(compact('path'));

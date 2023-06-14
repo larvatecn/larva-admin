@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Services;
 
@@ -81,7 +86,7 @@ class AdminPermissionService extends AdminService
 
     public function hasRepeated($data, $id = 0): bool
     {
-        $query = $this->query()->when($id, fn($query) => $query->where('id', '<>', $id));
+        $query = $this->query()->when($id, fn ($query) => $query->where('id', '<>', $id));
 
         if ((clone $query)->where('name', $data['name'])->exists()) {
             $this->setError(__('admin.admin_permission.name_already_exists'));

@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Console;
 
@@ -65,7 +70,7 @@ class InstallCommand extends Command
     public function createAuthController(): void
     {
         $authController = $this->directory . '/Controllers/AuthController.php';
-        $contents       = $this->getStub('AuthController');
+        $contents = $this->getStub('AuthController');
         $this->laravel['files']->put(
             $authController,
             str_replace('{{Namespace}}', $this->getNamespace('Controllers'), $contents)
@@ -87,15 +92,17 @@ class InstallCommand extends Command
         $file = $this->directory . '/routes.php';
 
         $contents = $this->getStub('routes');
-        $this->laravel['files']->put($file,
-            str_replace('{{Namespace}}', $this->getNamespace('Controllers'), $contents));
+        $this->laravel['files']->put(
+            $file,
+            str_replace('{{Namespace}}', $this->getNamespace('Controllers'), $contents)
+        );
         $this->line('<info>Routes file was created:</info> ' . str_replace(base_path(), '', $file));
     }
 
     public function createHomeController(): void
     {
         $homeController = $this->directory . '/Controllers/HomeController.php';
-        $contents       = $this->getStub('HomeController');
+        $contents = $this->getStub('HomeController');
         $this->laravel['files']->put(
             $homeController,
             str_replace('{{Namespace}}', config('admin.route.namespace'), $contents)
@@ -106,14 +113,16 @@ class InstallCommand extends Command
     public function createSettingController()
     {
         $settingController = $this->directory . '/Controllers/SettingController.php';
-        $contents          = $this->getStub('SettingController');
+        $contents = $this->getStub('SettingController');
         $this->laravel['files']->put(
             $settingController,
             str_replace('{{Namespace}}', config('admin.route.namespace'), $contents)
         );
-        $this->line('<info>SettingController file was created:</info> ' . str_replace(base_path(),
-                '',
-                $settingController));
+        $this->line('<info>SettingController file was created:</info> ' . str_replace(
+            base_path(),
+            '',
+            $settingController
+        ));
     }
 
     protected function getNamespace($name = null): string

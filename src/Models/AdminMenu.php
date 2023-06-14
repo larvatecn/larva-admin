@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Models;
 
@@ -9,14 +14,14 @@ class AdminMenu extends BaseModel
 {
     protected $guarded = [];
 
-    const TYPE_ROUTE = 1;
-    const TYPE_LINK  = 2;
+    public const TYPE_ROUTE = 1;
+    public const TYPE_LINK = 2;
 
     public static function getType(): array
     {
         return [
             self::TYPE_ROUTE => __('admin.admin_menu.route'),
-            self::TYPE_LINK  => __('admin.admin_menu.link'),
+            self::TYPE_LINK => __('admin.admin_menu.link'),
         ];
     }
 
@@ -32,7 +37,7 @@ class AdminMenu extends BaseModel
 
     public function title(): Attribute
     {
-        return Attribute::get(function ($value){
+        return Attribute::get(function ($value) {
             return __("menu.{$value}") == "menu.{$value}" ? $value : __("menu.{$value}");
         });
     }

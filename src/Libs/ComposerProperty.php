@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Libs;
 
@@ -36,7 +41,7 @@ class ComposerProperty implements Arrayable
 
     /**
      * @param $key
-     * @param  null  $default
+     * @param null $default
      * @return mixed
      */
     public function get($key, $default = null)

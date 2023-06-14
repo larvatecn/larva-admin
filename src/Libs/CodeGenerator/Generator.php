@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Libs\CodeGenerator;
 
@@ -10,31 +15,31 @@ use Illuminate\Support\Facades\Schema;
 class Generator
 {
     public static array $dataTypeMap = [
-        'int'                => 'integer',
-        'int@unsigned'       => 'unsignedInteger',
-        'tinyint'            => 'tinyInteger',
-        'tinyint@unsigned'   => 'unsignedTinyInteger',
-        'smallint'           => 'smallInteger',
-        'smallint@unsigned'  => 'unsignedSmallInteger',
-        'mediumint'          => 'mediumInteger',
+        'int' => 'integer',
+        'int@unsigned' => 'unsignedInteger',
+        'tinyint' => 'tinyInteger',
+        'tinyint@unsigned' => 'unsignedTinyInteger',
+        'smallint' => 'smallInteger',
+        'smallint@unsigned' => 'unsignedSmallInteger',
+        'mediumint' => 'mediumInteger',
         'mediumint@unsigned' => 'unsignedMediumInteger',
-        'bigint'             => 'bigInteger',
-        'bigint@unsigned'    => 'unsignedBigInteger',
-        'date'               => 'date',
-        'time'               => 'time',
-        'datetime'           => 'dateTime',
-        'timestamp'          => 'timestamp',
-        'enum'               => 'enum',
-        'json'               => 'json',
-        'binary'             => 'binary',
-        'float'              => 'float',
-        'double'             => 'double',
-        'decimal'            => 'decimal',
-        'varchar'            => 'string',
-        'char'               => 'char',
-        'text'               => 'text',
-        'mediumtext'         => 'mediumText',
-        'longtext'           => 'longText',
+        'bigint' => 'bigInteger',
+        'bigint@unsigned' => 'unsignedBigInteger',
+        'date' => 'date',
+        'time' => 'time',
+        'datetime' => 'dateTime',
+        'timestamp' => 'timestamp',
+        'enum' => 'enum',
+        'json' => 'json',
+        'binary' => 'binary',
+        'float' => 'float',
+        'double' => 'double',
+        'decimal' => 'decimal',
+        'varchar' => 'string',
+        'char' => 'char',
+        'text' => 'text',
+        'mediumtext' => 'mediumText',
+        'longtext' => 'longText',
     ];
 
     public static function make()
@@ -72,7 +77,7 @@ class Generator
     {
         return collect(self::$dataTypeMap)
             ->values()
-            ->map(fn($value) => ['label' => $value, 'value' => $value])
+            ->map(fn ($value) => ['label' => $value, 'value' => $value])
             ->toArray();
     }
 
@@ -88,10 +93,14 @@ class Generator
 
         try {
             foreach ($databases as $connectName => $value) {
-                if ($db && $db != $value['database']) continue;
+                if ($db && $db != $value['database']) {
+                    continue;
+                }
 
-                $sql = sprintf('SELECT * FROM information_schema.columns WHERE table_schema = "%s"',
-                    $value['database']);
+                $sql = sprintf(
+                    'SELECT * FROM information_schema.columns WHERE table_schema = "%s"',
+                    $value['database']
+                );
 
                 if ($tb) {
                     $p = Arr::get($value, 'prefix');
@@ -121,7 +130,7 @@ class Generator
                         ->whereNotIn('COLUMN_NAME', ['created_at', 'updated_at', 'deleted_at'])
                         ->map(function ($v) {
                             $v['COLUMN_TYPE'] = strtolower($v['COLUMN_TYPE']);
-                            $v['DATA_TYPE']   = strtolower($v['DATA_TYPE']);
+                            $v['DATA_TYPE'] = strtolower($v['DATA_TYPE']);
 
                             if (Str::contains($v['COLUMN_TYPE'], 'unsigned')) {
                                 $v['DATA_TYPE'] .= '@unsigned';
@@ -129,11 +138,11 @@ class Generator
 
 
                             return [
-                                'name'     => $v['COLUMN_NAME'],
-                                'type'     => Arr::get(Generator::$dataTypeMap, $v['DATA_TYPE'], 'string'),
-                                'default'  => $v['COLUMN_DEFAULT'],
+                                'name' => $v['COLUMN_NAME'],
+                                'type' => Arr::get(Generator::$dataTypeMap, $v['DATA_TYPE'], 'string'),
+                                'default' => $v['COLUMN_DEFAULT'],
                                 'nullable' => $v['IS_NULLABLE'] == 'YES',
-                                'comment'  => $v['COLUMN_COMMENT'],
+                                'comment' => $v['COLUMN_COMMENT'],
                             ];
                         })
                         ->values();
@@ -157,10 +166,14 @@ class Generator
 
         try {
             foreach ($databases as $connectName => $value) {
-                if ($db && $db != $value['database']) continue;
+                if ($db && $db != $value['database']) {
+                    continue;
+                }
 
-                $sql = sprintf('SELECT * FROM information_schema.columns WHERE table_schema = "%s"',
-                    $value['database']);
+                $sql = sprintf(
+                    'SELECT * FROM information_schema.columns WHERE table_schema = "%s"',
+                    $value['database']
+                );
 
                 if ($tb) {
                     $p = Arr::get($value, 'prefix');
@@ -186,7 +199,7 @@ class Generator
                         ->keyBy('COLUMN_NAME')
                         ->where('COLUMN_KEY', 'PRI')
                         ->whereNotIn('COLUMN_NAME', ['created_at', 'updated_at', 'deleted_at'])
-                        ->map(fn($v) => $v['COLUMN_NAME'])
+                        ->map(fn ($v) => $v['COLUMN_NAME'])
                         ->values()
                         ->first();
                 });

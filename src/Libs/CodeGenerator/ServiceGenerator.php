@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Libs\CodeGenerator;
 
@@ -10,10 +15,10 @@ class ServiceGenerator extends BaseGenerator
 
     public function generate($serviceName, $modelName): bool|string
     {
-        $name      = str_replace('/', '\\', $serviceName);
+        $name = str_replace('/', '\\', $serviceName);
         $modelName = str_replace('/', '\\', $modelName);
-        $path      = static::guessClassFileName($name);
-        $dir       = dirname($path);
+        $path = static::guessClassFileName($name);
+        $dir = dirname($path);
 
         $files = app('files');
 
@@ -23,7 +28,7 @@ class ServiceGenerator extends BaseGenerator
 
         if ($files->exists($path) && !$this->overwrite) {
             abort(HttpResponse::HTTP_BAD_REQUEST, "Service [$name] already exists!");
-        }else{
+        } else {
             $files->delete($path);
         }
 

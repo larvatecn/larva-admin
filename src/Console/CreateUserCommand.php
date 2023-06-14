@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Console;
 
@@ -20,12 +25,12 @@ class CreateUserCommand extends Command
      *
      * @var string
      */
-    protected $description = '创建admin用户';
+    protected $description = '创建管理员用户';
 
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $username = $this->ask('Please enter a username to login');
 

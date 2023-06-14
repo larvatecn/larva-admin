@@ -1,4 +1,9 @@
 <?php
+/**
+ * This is NOT a freeware, use is subject to license terms.
+ *
+ * @copyright Copyright (c) 2010-2099 Jinan Larva Information Technology Co., Ltd.
+ */
 
 namespace Larva\Admin\Models;
 
@@ -30,8 +35,8 @@ class AdminUser extends User implements AuthenticatableContract
         $storage = \Illuminate\Support\Facades\Storage::disk(config('admin.upload.disk'));
 
         return Attribute::make(
-            get: fn($value) => $value ? admin_resource_full_path($value) : url(config('admin.default_avatar')),
-            set: fn($value) => str_replace($storage->url(''), '', $value)
+            get: fn ($value) => $value ? admin_resource_full_path($value) : url(config('admin.default_avatar')),
+            set: fn ($value) => str_replace($storage->url(''), '', $value)
         );
     }
 
