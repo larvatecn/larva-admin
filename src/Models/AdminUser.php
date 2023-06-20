@@ -36,6 +36,25 @@ class AdminUser extends User implements AuthenticatableContract
 
     protected $guarded = [];
 
+    /**
+     * Perform any actions required before the model boots.
+     *
+     * @return void
+     */
+    protected static function booting(): void
+    {
+        parent::booting();
+        static::created(function (AdminUser $model) {
+            if (class_exists(\App\Services\UserService::class)) {
+                $user = \App\Services\UserService::createUser($model->username);
+                $model->user_id = $user->id;
+            }
+        });
+        static::deleting(function (AdminUser $model) {
+            $model->roles()->detach();
+        });
+    }
+    
     protected function serializeDate(\DateTimeInterface $date): string
     {
         return $date->format($this->getDateFormat());
@@ -67,24 +86,6 @@ class AdminUser extends User implements AuthenticatableContract
             get: fn($value) => $value ? admin_resource_full_path($value) : url(config('admin.default_avatar')),
             set: fn($value) => str_replace($storage->url(''), '', $value)
         );
-    }
-
-    /**
-     * Bootstrap the model and its traits.
-     *
-     * @return void
-     */
-    protected static function boot(): void
-    {
-        parent::boot();
-        static::created(function (AdminUser $model) {
-            if (class_exists(\App\Services\UserService::class)) {
-                \App\Services\UserService::createUser($model->username);
-            }
-        });
-        static::deleting(function (AdminUser $model) {
-            $model->roles()->detach();
-        });
     }
 
     public function allPermissions(): Collection
