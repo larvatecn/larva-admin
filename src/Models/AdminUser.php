@@ -44,7 +44,7 @@ class AdminUser extends User implements AuthenticatableContract
     protected static function booting(): void
     {
         parent::booting();
-        static::created(function (AdminUser $model) {
+        static::creating(function (AdminUser $model) {
             if (class_exists(\App\Services\UserService::class)) {
                 $user = \App\Services\UserService::createUser($model->username);
                 $model->user_id = $user->id;
